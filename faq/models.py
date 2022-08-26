@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class Certificate(models.Model):
@@ -18,7 +19,7 @@ class Contact(models.Model):
     phone = models.CharField(max_length=32)
     email = models.EmailField()
     address = models.CharField(max_length=128)
-    schedule = models.TextField()
+    schedule = RichTextField()
 
     image = models.ImageField(upload_to='media/')
 
