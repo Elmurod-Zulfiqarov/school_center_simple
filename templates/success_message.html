@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Message Successsfully</title>
+    <link rel="icon" type="image/x-icon" href="{{ home.icon.url }}">
+	<!-- Bootstrap  -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	
+	<!-- css file -->
+	<link rel="stylesheet" href=".//../static/css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4 p-5"></div>
+            <div class="col-4 bg-light p-5 text-center text-dark fw-bold">
+                <img class="bg-light" src="../static/images/check.png" alt="">
+                <p> 
+                    <span class="form-blue">Спасибо</span> за заявку
+                </p>
+                <p>
+                    В ближайшее время мы <span class="form-blue">свяжемся</span> с Вами
+                </p>
+                <a href="{% url 'index' %}" class="btn btn-primary">назад</a>
+            </div>
+            <div class="col-4 p-5"></div>
+        </div>
+    </div>
+</body>
+</html>

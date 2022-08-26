@@ -1,0 +1,435 @@
+{% load static %}
+
+{% block extrahead %}
+<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
+{% endblock %}
+
+{% load crispy_forms_tags %}	
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>KEMENGER MEKTEBI - центр развития интеллекта</title>    
+	<link rel="icon" type="image/x-icon" href="{{ home.icon.url }}">
+	<!-- Bootstrap  -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	
+	<!-- css file -->
+	<link rel="stylesheet" href=".//../static/css/style.css">
+</head>
+<body>
+
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg">
+		<div class="container">
+			<div class="nav-brend">
+				<a class="navbar-brand" href="#"><img src="{{ home.icon.url }}" alt="brend of schoool"></a>
+			</div>
+			<div class="menu">
+				<ul class="navbar-nav">
+					<!-- {%for item in menu%} 
+						<li class="nav-item ">
+							<a class="nav-link mx-2 text-dark fw-semibold" href="#about">{{ item.title }}</a>
+						</li>
+					{%endfor%} -->
+					<li class="nav-item ">
+						<a class="nav-link mx-2 text-dark fw-semibold" href="#about">О нас </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link mx-2 text-dark fw-semibold" href="#catalog">Каталог</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link mx-2 text-dark fw-semibold" href="#sertificate">Сертификаты</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link mx-2 text-dark fw-semibold" href="#review">Отзывы</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link mx-2 text-dark fw-semibold" href="#contact">Контакты</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="tel">
+				<span class="phone text-center"><img src="../static/images/phone.png" alt="phon icon"></span>
+				<a href='tel:"{{home.phone }}"' class="text-dark fw-bold text-decoration-none">
+					{{ home.phone }}
+				</a>
+			</div>
+		   
+		</div>
+	</nav> 
+
+
+	<!-- Header  -->
+	<header class="container mb-5 my-2">
+		<div class="row">
+			<div class="col-7 my-5">
+				<h1 class="my-5 fw-bold">
+					<span class="text-uppercase">KEMENGER MEKTEBI</span> - {{home.title}}
+				</h1>
+				<p class="my-5">
+					{{home.content}}
+				</p>
+				<button type="button" class="btn btn-warning btn-lg fw-bold" 
+					data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+						Оставить заявку
+				</button>
+				<!-- Modal -->
+				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					<div class="modal-content bg-light">
+						<div class="modal-header">
+						<h5 class="modal-title text-center px-4 py-3 fw-bold" id="staticBackdropLabel">Заполните <span class="form-blue">форму</span> и мы обязательно свяжемся с Вами.</h5>
+						<!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+						</div>
+						<div class="modal-body">
+							<form method="post">
+								{% csrf_token %}
+								
+								{{ form.as_p }}
+								
+								<!-- <input type="text" name="name" maxlength="64" required id="id_name" placeholder="Ваше имя...">
+							
+								<input type="text" name="phone" maxlength="32" required id="id_phone my-3" placeholder="Ваш телефон...">
+									
+								<textarea name="comment" required id="id_comment" placeholder="Комментарий...">
+								</textarea> -->
+
+								<button type="submit" class="btn btn-primary">
+										Оставить заявку
+								</button>
+								<!-- Modal -->
+								
+							</form>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-5">
+				<img class="pupil p-1" src="{{ home.photo.url }}" alt="pupil">
+			</div>
+		</div>
+	</header>
+
+
+	<main>
+
+		<!-- Section About -->
+		<section id="about">
+			<div class="container">
+				<div class="row">
+					{%for item in about %}
+						{%if item.id == 1 %}
+							<div class="col-6">
+								<p id="vektor_a1">
+									{{ item.content }}
+								</p>
+							</div>
+							<div class="col-6"><img src="{{ item.photo.url }}" alt="kids"></div>
+						{% else %}
+							<div class="col-6"><img src="{{ item.photo.url }}" alt="two kids"></div>
+							<div class="col-6">
+								<p id="vektor_a2">
+									{{ item.content }}
+								</p>
+						{% endif %}
+					{% endfor %}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section Cource -->
+		<section id="cource">
+			<div class="container text-center">
+				<div class="row">
+					
+						<div class="col-4">
+							<div class="row">
+								<div class="col-5 my-3"></div>
+								<div class="col-7 my-3">
+									{% for item in cource %}								
+										{% if item.id == 1 %}
+											<img src="{{ item.icon.url }}" alt="Скорочтение">
+											<p>{{ item.title}}</p>
+										{% endif %}
+									{% endfor %}
+								</div>
+								<div class="col-7 my-3">
+									{% for item in cource %}								
+										{% if item.id == 2 %}
+											<img src="{{ item.icon.url }}" alt="Скорочтение">
+											<p>{{ item.title}}</p>
+										{% endif %}
+									{% endfor %}
+								</div>
+								<div class="col-5 my-3"></div>
+								<div class="col-5 my-3"></div>
+								<div class="col-7">
+									{% for item in cource %}								
+										{% if item.id == 3 %}
+											<img src="{{ item.icon.url }}" alt="Скорочтение">
+											<p>{{ item.title}}</p>
+										{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+
+						<div class="col-4 text-center mt-5 text-align-center">
+							<div class="cource-about my-5">
+								<img class="cource-image" src="{{ about_cource.photo.url }}" alt="cources">
+								<p class="pt-5">{{ about_cource.content }}</p>
+							</div>
+							<div class="col-12  my-5">
+								{% for item in cource %}								
+									{% if item.id == 4 %}
+										<img src="{{ item.icon.url }}" alt="Скорочтение">
+										<p>{{ item.title}}</p>
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+
+						<div class="col-4">
+							<div class="row">
+								<div class="col-7 my-3">
+									{% for item in cource %}								
+										{% if item.id == 5 %}
+											<img src="{{ item.icon.url }}" alt="Скорочтение">
+											<p>{{ item.title}}</p>
+										{% endif %}
+									{% endfor %}
+								</div>
+								<div class="col-5 my-3"></div>
+								<div class="col-5 my-3"></div>
+								<div class="col-7 my-3">
+									{% for item in cource %}								
+										{% if item.id == 6 %}
+											<img src="{{ item.icon.url }}" alt="Скорочтение">
+											<p>{{ item.title}}</p>
+										{% endif %}
+									{% endfor %}
+								</div>
+								<div class="col-7 my-2">
+									{% for item in cource %}								
+										{% if item.id == 7 %}
+											<img src="{{ item.icon.url }}" alt="Скорочтение">
+											<p>{{ item.title}}</p>
+										{% endif %}
+									{% endfor %}
+								</div>
+								<div class="col-5 my-3"></div>
+								
+							</div>
+						</div>	
+						
+				</div>
+			</div>
+		</section>
+
+		<!-- Section Catalog -->
+		<section id="catalog">		
+			<div class="container text-center">
+				<div class="row">
+					<h2 class="title2 text-center mb-5">Каталог</h2>
+					{% for item in catalog %}
+						<div class="col-4">
+							<div class="card-title p-2 color-gulobi">
+								<h2>{{ item.title }}</h2>
+							</div>
+							<div class="card-price fw-bold">{{ item.price }}</div>
+							<div class="card-age">{{ item.age }}</div>
+							<div class="card-time">{{ item.schedule }}</div> <br>
+							<div class="card_skills">{{ item.skills | truncatechars_html:120 | safe}}</div>
+							<button class="btn btn-lg color-chernil"
+								data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+									Выбрать
+							</button>
+						</div>
+					{% endfor %}
+					<!-- <div class="col-4">
+						
+						<div class="card-title p-2 color-chernil">
+								<h2>скорочтение</h2>
+						</div>
+						<div class="card-price fw-bold">30 000 TG</div>
+						<div class="card-age">5-7 let age</div>
+						<div class="card-time">4:30 pm</div> <br>
+						<ul class="card-skills">
+							<li>front</li>
+							<li>back</li>
+							<li>dev</li>
+							<li>proger</li>
+							<li>lead</li>
+						</ul>
+						<button class="btn btn-lg color-chernil"
+							data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								Выбрать
+						</button>
+					</div>
+					<div class="col-4">
+						<div class="card-title p-2 color-lime">
+							<h2>ментальная арифметика</h2>
+						</div>
+						<div class="card-price fw-bold">30 000 TG</div>
+						<div class="card-age">5-7 let age</div>
+						<div class="card-time">4:30 pm</div> <br>
+						<div class="card_skills">
+							<ul>
+								<li>front</li>
+								<li>back</li>
+								<li>dev</li>
+								<li>proger</li>
+								<li>lead</li>
+							</ul>
+						</div>
+						<button class="btn btn-lg color-lime"
+							data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								Выбрать
+						</button>
+					</div> -->
+				</div>
+			</div>
+		</section>	
+
+		<!-- Section Sertificate -->
+		<section id="sertificate">
+			<div class="container">
+				<div class="row">
+					<h2 class="title2 text-center my-5">Наши сертификаты</h2>
+					{% for item in certificate %}
+						<div class="col-3">
+							<img src="{{item.photo.url}}" alt="">
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+		<!-- Section Review -->
+		<section id="review">
+			<div class="container">
+				<h2 class="title2 text-center my-5">Отзывы</h2>
+				<div class="d-flex justify-content-between mb-5">
+					{% for item in review %}
+						<div class="review-card">
+							<div class="d-flex justify-content-start align-items-center">
+								<div>
+									<img src="{{ item.awatar.url }}" alt="">
+								</div>
+								<div>
+									<span class="customer-name">{{ item.name }}</span>
+								</div>
+							</div>
+							<p>
+								{{ item.comment }}
+							</p>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+		<!-- Section Contact -->
+		<section id="contact">
+			<div class="container">
+				<div class="row">
+					<div class="col-6 info my-5">
+						<h2 class=" fw-bold text-center">Наши контакты</h2>
+
+						<p class="phone fw-bold">
+							Запишитесь на бесплатный пробный урок по номеру: <br>
+							<a href="tel:{{ contact.phone }}" class="text-light fw-bold text-decoration-none">
+								{{ contact.phone }}
+							</a>
+						</p>
+						<p class="address fw-bold">
+							Адрес: <br>
+							{{ contact.address }}
+						</p>
+						<p class="schedule fw-bold">
+							{{ contact.schedule}}	
+						</p>
+						<p class="email fw-bold">
+							E-mail: <br>
+							<a href="mailti:@kemenger.mektebi" class="text-light fw-bold text-decoration-none">
+								{{ contact.email }}
+							</a>
+						</p>
+					</div>
+					<div class="col-6 photo text-center my-5">
+						<img src="{{ contact.image.url }}" alt="pupil2 in contact">
+					</div>
+					<div class="col-12 mb-4">
+						<div class="map">
+							<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad43915d57a785cd21d46fbdd572590665de12ee042233e385b0cf71a4c4ba070&amp;source=constructor" width="100%" height="500" frameborder="0"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+
+	<footer>
+		<div class="container d-flex justify-content-between align-items-center">
+			<div class="nav-brend my-5">
+				<a class="navbar-brand" href="#"><img src="{{home.icon.url}}" alt="brend of schoool"></a>
+			</div>
+			
+			<div class="menu my-5">
+				<ul class="navbar-nav">
+					<div class="d-flex justify-content-between align-items-center">
+						<div>
+							<li class="nav-item">
+								<a class="nav-link mx-2 fw-bold" href="#about">О нас </a>
+							</li>
+						</div>
+						<div>
+							<li class="nav-item">
+								<a class="nav-link mx-2 fw-bold" href="#catalog">Каталог</a>
+							</li>
+						</div>
+						<div>
+							<li class="nav-item">
+								<a class="nav-link mx-2 fw-bold" href="#sertificate">Сертификаты</a>
+							</li>
+						</div>
+						<div>
+							<li class="nav-item">
+								<a class="nav-link mx-2 fw-bold" href="#review">Отзывы</a>
+							</li>
+						</div>
+						<div>
+							<li class="nav-item">
+								<a class="nav-link mx-2 fw-bold" href="#contact">Контакты</a>
+							</li>
+						</div>
+					</div>
+				</ul>
+			</div>
+
+			<div class="studio my-5">
+				<img src="../static/images/ds_studio.png" alt="ds_studio">
+			</div>
+		</div>	
+	</footer>
+
+
+	<!-- bootstrap js -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+</body>
+</html>

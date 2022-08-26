@@ -1,0 +1,8 @@
+__pycache__
+venv
+.env
+
+staticfiles
+mediafiles
+migrations
+db.sqlite3
